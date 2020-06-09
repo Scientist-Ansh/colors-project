@@ -5,4 +5,51 @@
     cursor: pointer;
     display: inline-block;
     position: relative;
+    margin-bottom:-3.7px;
+}
+
+.copy-button{
+    height: 30px;
+    width: 100px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-15px;
+    text-align: center;
+    outline: none;
+    background:rgba(255,255,255,0.3);
+    color:white;
+    border:none;
+    /* opacity set to 0 to add transition on hover */
+    opacity:0;
+    
+}
+
+/* when hovered on ColorBox copy-button will be modified  */
+.ColorBox:hover .copy-button{
+    opacity:1;
+    transition:0.5s;
+}
+
+.color-name{
+    position: absolute;
+    padding:10px;
+    top:0px;
+    left:0px;
+    color: black;
+    text-transform:uppercase;
+}
+
+.see-more{
+    position: absolute;
+    right:0px;
+    bottom:0px;
+    text-transform:uppercase;
+    background-color:rgba(255,255,255,0.3); 
+    color:white;
+    width:65px;
+    line-height: 30px;
+    text-align: center;
+
 }
