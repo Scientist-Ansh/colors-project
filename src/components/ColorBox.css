@@ -21,6 +21,7 @@
     background:rgba(255,255,255,0.3);
     color:white;
     border:none;
+    cursor: pointer;
     /* opacity set to 0 to add transition on hover */
     opacity:0;
     
