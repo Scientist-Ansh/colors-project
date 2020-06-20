@@ -6,6 +6,10 @@ import Slider from '@material-ui/core/Slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 import './Navbar.css';
 
 
@@ -14,19 +18,25 @@ export default class Navbar extends Component {
         super(props);
             this.state={
                 format:'hex',
-                value:this.props.level
+                value:this.props.level,
+                open:false
             }
             this.handleChange = this.handleChange.bind(this);
             this.handleSliderChange = this.handleSliderChange.bind(this);
+            this.closeSnackbar = this.closeSnackbar.bind(this);
     }
 
     handleChange(e){
-        this.setState({format:e.target.value},()=>{
+        this.setState({format:e.target.value,open:true},()=>{
             this.props.formatChange(this.state.format);
         })
     }
     handleSliderChange(e,value){
         this.setState({value});
+    }
+
+    closeSnackbar(){
+        this.setState({open:false})
     }
 
     render() {
@@ -56,6 +66,19 @@ export default class Navbar extends Component {
                         <MenuItem value='rgba'>Rgba</MenuItem>
                     </Select>
                 </div>
+
+                <Snackbar
+                    anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
+                    open={this.state.open}
+                    message={`Format changed to ${this.state.format}`}
+                    autoHideDuration={3000}
+                    onClose={this.closeSnackbar}
+                    action={[
+                        <IconButton onClick={this.closeSnackbar}>
+                            <CloseIcon/>
+                        </IconButton>
+                    ]}
+                />
 
 
             </header>
