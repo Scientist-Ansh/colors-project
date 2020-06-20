@@ -21,19 +21,3 @@
     display:inline-block;
 }
 
-.rc-slider-track{
-    background-color:transparent;
-}
-
-.rc-slider-rail{
-    height:8px;
-}
-
-.rc-slider-handle,
-.rc-slider-handle:active
-{
-    background-color:green;
-    box-shadow: none;
-    border:none;
-    
-}
