@@ -14,8 +14,6 @@ class App extends Component{
 
   findPalette(id){
     return seedColors.find((palette)=>{
-      console.log(palette.id);
-
       return palette.id === id}
       )
   }
@@ -24,7 +22,7 @@ class App extends Component{
     
     return(
       <Switch>
-        <Route exact path='/' render={()=><PaletteList palettes = {seedColors}/>}/>
+        <Route exact path='/' render={(routeProps)=><PaletteList palettes = {seedColors} {...routeProps}/>}/>
         <Route exact path='/palette/:id'
         render={(routeProps)=>
         <Palette palette ={generateColors(this.findPalette(routeProps.match.params.id))} />}/>
