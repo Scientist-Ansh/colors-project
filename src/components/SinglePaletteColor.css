@@ -1,0 +1,23 @@
+.Go-back-box{
+    width: 20%;
+    height: 50%;
+    margin:0 auto;
+    display: inline-block;
+    position: relative;
+    margin-bottom:-3.8px;
+}
+
+.Go-back{
+    height: 50px;
+    width: 120px;
+    position: absolute;
+    border-radius: 10px;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-15px;
+    text-align: center;
+    outline: none;
+    border:none;
+    cursor: pointer;
+}

@@ -4,6 +4,10 @@ import Navbar from './Navbar';
 import Footer from './PaletteFotter';
 import PaletteFotter from './PaletteFotter';
 
+import {Link} from 'react-router-dom';
+
+import './SinglePaletteColor.css';
+
 
 class SinglePaletteColor extends Component{
     constructor(props){
@@ -33,10 +37,16 @@ class SinglePaletteColor extends Component{
         let colorBoxes = this._colors.map(color=>
             <ColorBox key={color.name} name={color.name} background={color[this.state.format]}/>)
         return(
-            <div className="Palette"> 
+            <div className="SinglePaletteColor Palette"> 
                 <Navbar formatChange={this.handleFormatChange} allColors={false}/>
                 <div className="Palette-colors">
                     {colorBoxes}
+                    <div className="Go-back-box">
+                        <Link to={`/palette/${this.props.palette.id}`}>
+                            <button className="Go-back" style={{background:this._colors[2].hex}}>Go Back</button>
+                        </Link>
+                        
+                    </div>
                 </div>
                 <PaletteFotter paletteName={this.props.palette.paletteName} emoji ={this.props.palette.emoji}/>
             </div>
