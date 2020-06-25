@@ -48,19 +48,22 @@ export default class Navbar extends Component {
                 <div className="logo">
                     <Link to='/' style={{textDecoration:"none",color:"black"}}>colorPicker</Link>
                 </div>
-                <div className="slider-container">
-                    <span>Level: {this.state.value}</span>
-                    <div className="slider">
-                        <Slider
-                            value={this.state.value}
-                            track={false}
-                            min={100} max={900}
-                            step={100}
-                            aria-labelledby="track-false-slider"
-                            onChange={this.handleSliderChange}
-                            onChangeCommitted = {levelChange}/>
+                {
+                    this.props.allColors &&
+                    <div className="slider-container">
+                        <span>Level: {this.state.value}</span>
+                        <div className="slider">
+                            <Slider
+                                value={this.state.value}
+                                track={false}
+                                min={100} max={900}
+                                step={100}
+                                aria-labelledby="track-false-slider"
+                                onChange={this.handleSliderChange}
+                                onChangeCommitted = {levelChange}/>
+                        </div>
                     </div>
-                </div>
+                }
                 <div className="select-container">
                     <Select value = {this.state.format} onChange={this.handleChange}>
                         <MenuItem value='hex'>Hex</MenuItem>

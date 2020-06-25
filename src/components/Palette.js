@@ -22,10 +22,15 @@ export default class Palette extends Component{
     render(){
         let {level,format} = this.state;
         const colorBoxes = this.props.palette.colors[level].map(color=>
-            <ColorBox background={color[format]} name={color.name} key={color.id}/>)
+            <ColorBox background={color[format]}
+             name={color.name} 
+             key={color.id}
+             moreLink={`/palette/${this.props.palette.id}/${color.id}`}
+             />)
         return(
             <div className="Palette">
-                <NavBar level={level} levelChange={this.handleLevelChange} formatChange={this.handleFormatChange}/>    
+                <NavBar level={level} levelChange={this.handleLevelChange}
+                 formatChange={this.handleFormatChange} allColors/>    
                 <div className="Palette-colors">
                     {colorBoxes}
                 </div>
