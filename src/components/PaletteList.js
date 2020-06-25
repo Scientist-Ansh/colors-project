@@ -39,7 +39,6 @@ const styles = {
 class PaletteList extends Component{
 
     handleClick(id){
-        console.log('clicked');
         this.props.history.push(`/palette/${id}`);
     }
 

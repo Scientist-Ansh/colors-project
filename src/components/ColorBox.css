@@ -46,6 +46,11 @@
     text-transform:uppercase;
 }
 
+/* light-text overrides the color in colorr-name */
+.light-text{
+    color:white;
+}
+
 .see-more{
     position: absolute;
     right:0px;
@@ -57,6 +62,8 @@
     line-height: 30px;
     text-align: center;
 }
+
+
 
 /* this is a overlay which is always on the screen vut not visible */
 .copy-overlay{
@@ -108,3 +115,7 @@
     margin:0px;
 }
 
+/* dark-text overrides the color property*/
+.dark-text{
+    color:black;
+}
