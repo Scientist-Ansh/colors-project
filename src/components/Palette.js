@@ -25,7 +25,7 @@ export default class Palette extends Component{
             <ColorBox background={color[format]}
              name={color.name} 
              key={color.id}
-             moreLink={`/palette/${this.props.palette.id}/${color.id}`}
+             showAllColors={`/palette/${this.props.palette.id}/${color.id}`}
              />)
         return(
             <div className="Palette">
