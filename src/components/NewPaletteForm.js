@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import DraggableColorBox from './DraggableColorBox';
 
 // drawer Component
 import clsx from 'clsx';
@@ -58,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
     },
     content: {
+        height:'calc(100vh - 64px)',
         flexGrow: 1,
         padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
@@ -76,8 +79,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPaletteForm() {
+    const [currentColor, setCurrentColor] = useState("blue");
+    const [colors, setColors] = useState(['blue','red']);
+
+
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -132,8 +139,14 @@ export default function NewPaletteForm() {
                     <Button variant="contained" color="primary">Random Color</Button>
                 </div>
 
-                <ChromePicker color="blue" onChangeComplete={newColor => console.log(newColor)} />
-                <Button variant="contained" color="primary">Add Color</Button>
+                <ChromePicker
+                    color={currentColor}
+                    onChangeComplete={newColor => setCurrentColor(newColor.hex)}
+                />
+                <Button variant="contained" color="primary" style={{ backgroundColor: currentColor }}
+                onClick={()=>setColors([...colors,currentColor])}>
+                    Add Color
+                </Button>
 
             </Drawer>
             <main
@@ -142,6 +155,7 @@ export default function NewPaletteForm() {
                 })}
             >
                 <div className={classes.drawerHeader} />
+                {colors.map(color=><DraggableColorBox color={color}/>)}
             </main>
         </div>
     );
