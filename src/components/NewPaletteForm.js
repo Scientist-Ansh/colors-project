@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm(props) {
     const [currentColor, setCurrentColor] = useState("blue");
     const [colors, setColors] = useState([]);
     const [newColorName, setNewColorName] = useState("")
@@ -115,11 +115,20 @@ export default function NewPaletteForm() {
         setNewColorName("");
     }
 
+    const savePalette = () =>{
+        const newName = "New Palette";
+        const id = newName.toLowerCase().replace(' ','-')
+        const newPalette = {id:id,paletteName:newName,colors:colors}
+        props.savePalette(newPalette);
+        props.history.push('/')
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBar
                 position="fixed"
+                color="default"
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
@@ -137,6 +146,7 @@ export default function NewPaletteForm() {
                     <Typography variant="h6" noWrap>
                         Persistent drawer
                     </Typography>
+                    <Button variant="contained" color="primary" onClick={savePalette}>Save Palette</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
