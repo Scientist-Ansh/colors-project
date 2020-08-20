@@ -8,7 +8,6 @@ const styles = {
         width: "20%",
         height: "25%",
         margin: "0 auto",
-        cursor: "pointer",
         display: "inline-block",
         position: "relative",
         marginBottom: "-3.8px",
@@ -28,17 +27,18 @@ const styles = {
         textTransform: "uppercase",
     },
     deleteIcon: {
-        transition:"all 0.3s ease-in-out"
+        transition:"all 0.3s ease-in-out",
+        cursor:"pointer"
     }
 }
 
 const DraggableColorBox = (props) => {
-    const { classes } = props
+    const { classes,name,color,deleteBox} = props;
     return (
-        <div className={classes.box} style={{ backgroundColor: props.color }}>
+        <div className={classes.box} style={{ backgroundColor: color }}>
             <div className={classes.boxContent}>
-                <span>{props.name}</span>
-                <DeleteRoundedIcon className={classes.deleteIcon} />
+                <span>{name}</span>
+                <DeleteRoundedIcon className={classes.deleteIcon} onClick = {deleteBox} />
             </div>
 
         </div>

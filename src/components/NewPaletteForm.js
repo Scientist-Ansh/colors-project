@@ -129,6 +129,10 @@ export default function NewPaletteForm(props) {
         props.history.push('/')
     }
 
+    const handleDelete = (name) => {
+        setColors(colors.filter(color=>color.name!=name));
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -156,8 +160,8 @@ export default function NewPaletteForm(props) {
                         <TextValidator value={newPaletteName}
                             label="Palette Name"
                             onChange={(e) => setNewPaletteName(e.target.value)}
-                            validators={["required","isPaletteNameUnique"]}
-                            errorMessages={["Enter a Palette name","Palette name already taken"]} />
+                            validators={["required", "isPaletteNameUnique"]}
+                            errorMessages={["Enter a Palette name", "Palette name already taken"]} />
                         <Button variant="contained" color="primary" type="submit">
                             Save Palette
                         </Button>
@@ -209,7 +213,11 @@ export default function NewPaletteForm(props) {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                {colors.map(color => <DraggableColorBox color={color.color} name={color.name} />)}
+                {
+                    colors.map(color =>
+                        <DraggableColorBox key={color.name} color={color.color} name={color.name}
+                            deleteBox={()=>handleDelete(color.name)} />)
+                }
             </main>
         </div>
     );
