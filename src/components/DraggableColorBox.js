@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
+import {SortableElement} from 'react-sortable-hoc';
 
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
@@ -32,7 +33,7 @@ const styles = {
     }
 }
 
-const DraggableColorBox = (props) => {
+const DraggableColorBox = SortableElement((props) => {
     const { classes,name,color,deleteBox} = props;
     return (
         <div className={classes.box} style={{ backgroundColor: color }}>
@@ -42,7 +43,7 @@ const DraggableColorBox = (props) => {
             </div>
 
         </div>
-    )
-}
+    );
+});
 
 export default withStyles(styles)(DraggableColorBox);
