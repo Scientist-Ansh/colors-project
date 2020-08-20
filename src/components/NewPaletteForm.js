@@ -18,8 +18,8 @@ import Button from '@material-ui/core/Button';
 
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
 import { arrayMove } from 'react-sortable-hoc';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 400;
 
@@ -83,13 +83,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NewPaletteForm(props) {
     const [currentColor, setCurrentColor] = useState("blue");
-    const [colors, setColors] = useState([]);
+    const [colors, setColors] = useState([...props.palettes[0].colors]);
     const [newColorName, setNewColorName] = useState("")
     const [newPaletteName, setNewPaletteName] = useState("")
 
 
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
+    const isPaletteFull = colors.length >= 20;
 
     useEffect(() => {
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
@@ -140,6 +141,13 @@ export default function NewPaletteForm(props) {
         setColors(newColors);
     };
 
+    const addRandomColor = () => {
+        let paletteIndex = Math.floor(Math.random() * props.palettes.length);
+        let randomColors = props.palettes[paletteIndex].colors;
+        let colorIndex = Math.floor(Math.random() * randomColors.length);
+        setColors([...colors, randomColors[colorIndex]]);
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -172,6 +180,9 @@ export default function NewPaletteForm(props) {
                         <Button variant="contained" color="primary" type="submit">
                             Save Palette
                         </Button>
+                        <Link to='/'>
+                            <Button variant="contained" color="secondary">Go Back</Button>
+                        </Link>
                     </ValidatorForm>
 
                 </Toolbar>
@@ -193,8 +204,11 @@ export default function NewPaletteForm(props) {
                 <Divider />
                 <Typography variant="h4">Create a Palette</Typography>
                 <div>
-                    <Button variant="contained" color="secondary">Clear Palette</Button>
-                    <Button variant="contained" color="primary">Random Color</Button>
+                    <Button variant="contained" color="secondary" onClick={() => setColors([])}>Clear Palette</Button>
+                    <Button variant="contained" color="primary"
+                        onClick={addRandomColor} disabled={isPaletteFull}>
+                        Random Color
+                    </Button>
                 </div>
 
                 <ChromePicker
@@ -207,9 +221,13 @@ export default function NewPaletteForm(props) {
                         validators={['required', 'isColorUnique', 'isColorNameUnique']}
                         errorMessages={['Enter a color name', 'Color already used', 'Color name must be unique']}
                     />
-                    <Button variant="contained" color="primary" style={{ backgroundColor: currentColor }}
-                        type="submit">
-                        Add Color
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        style={{ backgroundColor: isPaletteFull ? "lightgrey" : currentColor }}
+                        type="submit"
+                        disabled={isPaletteFull}>
+                        {isPaletteFull?"Palette full":"Add Color"}
                 </Button>
                 </ValidatorForm>
 
