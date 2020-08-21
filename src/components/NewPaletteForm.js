@@ -77,6 +77,37 @@ const useStyles = makeStyles((theme) => ({
         }),
         marginLeft: 0,
     },
+    drawerBody:{
+        width:"90%",
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        height:"100%",
+        textAlign:"center",
+        margin: "0 auto"
+    },
+    btns:{
+        marginBottom:"1rem",
+        width:"100%",
+        "& button":{
+            width:"50%"
+        }
+    },
+    form:{
+        width:"100%",
+        marginTop:"1rem",
+    },
+    addButton:{
+        padding:"10px",
+        margin:"1rem",
+        width:"80%",
+        fontSize:"1.3rem"
+    },
+    chromePicker:{
+        minWidth:"225px",
+        width:"70% !important"
+    }
 }));
 
 export default function NewPaletteForm(props) {
@@ -171,34 +202,41 @@ export default function NewPaletteForm(props) {
                     </IconButton>
                 </div>
                 <Divider />
-                <Typography variant="h4">Create a Palette</Typography>
-                <div>
-                    <Button variant="contained" color="secondary" onClick={() => setColors([])}>Clear Palette</Button>
-                    <Button variant="contained" color="primary"
-                        onClick={addRandomColor} disabled={isPaletteFull}>
-                        Random Color
+                <div className={classes.drawerBody}>
+                    <Typography variant="h4" gutterBottom>Create a Palette</Typography>
+                    <div className={classes.btns}>
+                        <Button variant="contained" color="secondary" onClick={() => setColors([])}>Clear Palette</Button>
+                        <Button  variant="contained" color="primary"
+                            onClick={addRandomColor} disabled={isPaletteFull}>
+                            Random Color
                     </Button>
-                </div>
+                    </div>
 
-                <ChromePicker
-                    color={currentColor}
-                    onChangeComplete={newColor => setCurrentColor(newColor.hex)}
-                />
-                <ValidatorForm onSubmit={handleSubmit}>
-                    <TextValidator value={newColorName}
-                        onChange={(e) => setNewColorName(e.target.value)}
-                        validators={['required', 'isColorUnique', 'isColorNameUnique']}
-                        errorMessages={['Enter a color name', 'Color already used', 'Color name must be unique']}
+                    <ChromePicker className={classes.chromePicker}
+                        color={currentColor}
+                        onChangeComplete={newColor => setCurrentColor(newColor.hex)}
                     />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        style={{ backgroundColor: isPaletteFull ? "lightgrey" : currentColor }}
-                        type="submit"
-                        disabled={isPaletteFull}>
-                        {isPaletteFull ? "Palette full" : "Add Color"}
-                    </Button>
-                </ValidatorForm>
+                    <ValidatorForm className={classes.form} onSubmit={handleSubmit} >
+                        <TextValidator value={newColorName}
+                            label="Color Name"
+                            variant="filled"
+                            fullWidth
+                            onChange={(e) => setNewColorName(e.target.value)}
+                            validators={['required', 'isColorUnique', 'isColorNameUnique']}
+                            errorMessages={['Enter a color name', 'Color already used', 'Color name must be unique']}
+                        />
+                        <Button
+                            className={classes.addButton}
+                            variant="contained"
+                            color="primary"
+                            style={{ backgroundColor: isPaletteFull ? "lightgrey" : currentColor }}
+                            type="submit"
+                            disabled={isPaletteFull}
+                            size="large">
+                            {isPaletteFull ? "Palette full" : "Add Color"}
+                        </Button>
+                    </ValidatorForm>
+                </div>
 
             </Drawer>
             <main
