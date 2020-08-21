@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
 import DraggableColorList from './DraggableColorList';
+import NewPaletteFormNav from './NewPaletteFormNav';
+
 
 // drawer Component
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
-import { Link } from 'react-router-dom';
+
 
 const drawerWidth = 400;
 
@@ -150,43 +148,14 @@ export default function NewPaletteForm(props) {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                color="default"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Persistent drawer
-                    </Typography>
-                    <ValidatorForm onSubmit={savePalette}>
-                        <TextValidator value={newPaletteName}
-                            label="Palette Name"
-                            onChange={(e) => setNewPaletteName(e.target.value)}
-                            validators={["required", "isPaletteNameUnique"]}
-                            errorMessages={["Enter a Palette name", "Palette name already taken"]} />
-                        <Button variant="contained" color="primary" type="submit">
-                            Save Palette
-                        </Button>
-                        <Link to='/'>
-                            <Button variant="contained" color="secondary">Go Back</Button>
-                        </Link>
-                    </ValidatorForm>
-
-                </Toolbar>
-            </AppBar>
+            <NewPaletteFormNav
+                classes={classes}
+                handleDrawerOpen={handleDrawerOpen}
+                savePalette={savePalette}
+                newPaletteName={newPaletteName}
+                open={open}
+                handleNewPaletteName={(name) => setNewPaletteName(name)}
+            />
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -227,8 +196,8 @@ export default function NewPaletteForm(props) {
                         style={{ backgroundColor: isPaletteFull ? "lightgrey" : currentColor }}
                         type="submit"
                         disabled={isPaletteFull}>
-                        {isPaletteFull?"Palette full":"Add Color"}
-                </Button>
+                        {isPaletteFull ? "Palette full" : "Add Color"}
+                    </Button>
                 </ValidatorForm>
 
             </Drawer>
