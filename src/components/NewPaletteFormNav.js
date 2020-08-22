@@ -1,5 +1,7 @@
 import React from 'react';
 
+import NewPaletteSubmitForm from './NewPaletteSubmitForm';
+
 // App Bar Component
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
 
 
@@ -37,22 +38,17 @@ export default function NewPaletteFormNav(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Persistent drawer
+                    <Typography style={{marginRight:"auto"}} variant="h6" noWrap>
+                        New Palette
                     </Typography>
-                    <ValidatorForm onSubmit={savePalette}>
-                        <TextValidator value={newPaletteName}
-                            label="Palette Name"
-                            onChange={(e) => handleNewPaletteName(e.target.value)}
-                            validators={["required", "isPaletteNameUnique"]}
-                            errorMessages={["Enter a Palette name", "Palette name already taken"]} />
-                        <Button variant="contained" color="primary" type="submit">
-                            Save Palette
-                        </Button>
-                        <Link to='/'>
+                    <NewPaletteSubmitForm 
+                        savePalette={savePalette}
+                        newPaletteName={newPaletteName}
+                        handleNewPaletteName = {handleNewPaletteName}
+                    />
+                    <Link style={{textDecoration:"none"}} to='/'>
                             <Button variant="contained" color="secondary">Go Back</Button>
-                        </Link>
-                    </ValidatorForm>
+                    </Link>
 
                 </Toolbar>
             </AppBar>

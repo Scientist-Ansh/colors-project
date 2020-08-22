@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 0,
     },
     drawerBody:{
-        width:"90%",
+        width:"80%",
         display:"flex",
         flexDirection:"column",
         justifyContent:"center",
@@ -100,8 +100,8 @@ const useStyles = makeStyles((theme) => ({
     },
     addButton:{
         padding:"10px",
-        margin:"1rem",
-        width:"80%",
+        marginTop:"1rem",
+        width:"100%",
         fontSize:"1.3rem"
     },
     chromePicker:{
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPaletteForm(props) {
-    const [currentColor, setCurrentColor] = useState("blue");
+    const [currentColor, setCurrentColor] = useState("#FF0039");
     const [colors, setColors] = useState([...props.palettes[0].colors]);
     const [newColorName, setNewColorName] = useState("")
     const [newPaletteName, setNewPaletteName] = useState("")
