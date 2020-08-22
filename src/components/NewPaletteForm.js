@@ -153,10 +153,10 @@ export default function NewPaletteForm(props) {
         setNewColorName("");
     }
 
-    const savePalette = () => {
+    const savePalette = (emoji) => {
         const newName = newPaletteName;
         const id = newName.toLowerCase().replace(' ', '-')
-        const newPalette = { id: id, paletteName: newName, colors: colors }
+        const newPalette = { id: id, paletteName: newName, colors: colors,emoji:emoji}
         props.savePalette(newPalette);
         props.history.push('/')
     }

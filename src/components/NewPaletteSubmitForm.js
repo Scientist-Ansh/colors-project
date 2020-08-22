@@ -1,5 +1,9 @@
 import React from 'react';
 
+//emoji-picker
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+
 // dialog
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -14,6 +18,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 export default function NewPaletteSubmitForm(props) {
     const { savePalette, newPaletteName, handleNewPaletteName } = props
     const [open, setOpen] = React.useState(false);
+    const [emojiDialog,setEmojiDialog] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -23,15 +28,26 @@ export default function NewPaletteSubmitForm(props) {
         setOpen(false);
     };
 
+    const handleNameSubmit=()=>{
+        setOpen(false);
+        setEmojiDialog(true);
+    }
+
     return (
         <div>
             <Button style={{marginRight:"1rem"}} variant="contained" color="primary" onClick={handleClickOpen}>
                 Save
             </Button>
+            <Dialog   open={emojiDialog} >
+                <DialogTitle id="form-dialog-title">Select a Palette emoji</DialogTitle>
+                <Picker set='google' title="Palette emoji" onSelect={({native})=>savePalette(native)}
+                />
+            </Dialog>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Palette Name</DialogTitle>
-                <ValidatorForm onSubmit={savePalette}>
+                <ValidatorForm onSubmit={handleNameSubmit}>
                     <DialogContent>
+                        
                         <DialogContentText>
                             Please enter the name of your new Palette.
                         </DialogContentText>
@@ -51,7 +67,7 @@ export default function NewPaletteSubmitForm(props) {
                     </Button>
                         <Button variant="contained" color="primary" type="submit">
                             Save Palette
-                    </Button>
+                        </Button>
                     </DialogActions>
                 </ValidatorForm>
             </Dialog>
