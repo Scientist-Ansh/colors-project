@@ -50,15 +50,20 @@ const styles = {
 
 function MiniPalette(props) {
     const { classes, paletteName, emoji } = props;
+
     const miniColorBoxes = props.colors.map(color => (
         <div key={color.name} className={classes.miniBox} style={{ background: color.color }}>
-
         </div>
-    ))
+    ));
+
+    const handleDelete=(e)=>{
+        e.stopPropagation();
+        props.deletePalette(props.id)
+    }
     return (
         <div className={classes.main} onClick={props.handleClick}>
             <div style={{ position: "relative" }}>
-                <DeleteRoundedIcon className={classes.deleteIcon} />
+                <DeleteRoundedIcon className={classes.deleteIcon} onClick={handleDelete} />
             </div>
 
             <div className={classes.colors}>
