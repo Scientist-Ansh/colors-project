@@ -5,6 +5,7 @@ export const styles = {
         animation: "$gradient 15s ease infinite",
         display: 'flex',
         height: '100vh',
+        overflow:'scroll',
         alignItems: 'flex-start',
         justifyContent: 'center',
     },
