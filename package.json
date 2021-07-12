@@ -2,6 +2,7 @@
   "name": "follow-along",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://scientist-ansh.github.io/colors-project",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "chroma-js": "^2.1.0",
     "emoji-mart": "^3.0.0",
+    "gh-pages": "^3.2.3",
     "rc-slider": "^9.3.1",
     "react": "^16.13.1",
     "react-color": "^2.18.1",
@@ -22,8 +24,10 @@
     "react-sortable-hoc": "^1.11.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "CI= react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
